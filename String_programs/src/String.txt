@@ -1,0 +1,220 @@
+✅ What is String in Java? Is it a primitive or object?
+
+🔹What is a String in Java?
+
+📌  In Java, a String is an object represent sequence of characters (letters, numbers, symbols) stored together.
+
+📌   String is represent by String class which is available in java.lang package
+
+➤ Example:String name = "Sarah";
+
+🔹 Is String a primitive or an object?
+
+📌Primitive types in Java are the simple data types like:
+int, double, char, boolean, etc.
+
+📌These are stored directly in memory and are not objects.
+
+🔹String is NOT primitive.
+📌It is a class in Java (java.lang.String), and when you create a string, you are actually creating an object of that class.
+
+
+✅ Summary:
+
+String in Java = Sequence of characters.
+
+Type = Object (from java.lang.String class), not a primitive.
+
+Benefit = Comes with useful built-in methods.
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+✅ Why is String immutable?
+
+📘 Why is String Immutable in Java?
+
+🔹 Meaning of Immutable
+
+📌 Immutable means the value cannot be changed once the object is created.
+
+📌 Any change creates a new String object instead of modifying the existing one.
+
+📌 Example:
+
+String name = "Sarah";
+name = name + " Rocks"; // Creates a new object
+
+🔹 Reasons Why String is Immutable
+
+📌 Security – Protects sensitive data.
+
+📌 Memory Efficiency – Works with String Pool safely.
+
+📌 Thread-Safety – No synchronization issues.
+
+📌 Consistent Hashcode – Reliable in collections.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+✅ What is the String pool?
+
+📘 String Pool in Java
+
+📌 The String Pool (also called String Intern Pool or string constant pool)
+    -> it is special memory in jvm to store string objects
+    -> it will not allocate to usa duplicate values
+
+📌 Example:
+     
+    String s1 = "Java";
+    String s2 = "Java"; // Reuses same object from String Pool
+    System.out.println(s1 == s2); // true
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+✅ Difference between == and .equals()?
+
+📘 Difference Between == and .equals() in Java
+
+
+🔹 == Operator
+
+📌 to Compares memory addresses (references), of the object.
+
+📌 Checks whether two references (memory addresses)  same object in memory.
+
+📌 Example:
+
+String s1 = "Java";
+String s2 = "Java";
+System.out.println(s1 == s2); // true (same object from String Pool)
+
+String s3 = new String("Java");
+System.out.println(s1 == s3); // false (different objects)
+
+🔹 .equals() Method
+
+📌 Defined in the(it is an object class method) Object class and overridden in String class to compare content of 2 strings.
+
+📌 Checks whether two objects have the same value, regardless of memory location.
+
+📌 Example:
+
+String s1 = "Java";
+String s3 = new String("Java");
+System.out.println(s1.equals(s3)); // true (same content)
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+✅ Difference between String, StringBuilder, and StringBuffer (brief mention)
+
+📘 Difference Between String, StringBuilder, and StringBuffer
+
+🔹 String
+
+📌 Immutable – String is immutable once created,the value cannot be changed.
+
+📌 Slower for modifications because a new object is created every time.
+
+📌 Best for storing fixed text.
+
+📌 it is Thread-safe(bcz immutable)
+
+
+🔹 StringBuilder
+
+📌 Mutable – Can change the value without creating a new object.
+
+📌 Not thread-safe – Faster in single-threaded environments.
+
+📌 Best for frequent changes to text in single-threaded programs.
+
+📌faster(no synchronization overhead)
+
+🔹 StringBuffer
+
+📌 Mutable – Can change the value without creating a new object.
+
+📌 Thread-safe – Methods are synchronized (safe for multi-threading).
+
+📌 Slightly slower than StringBuilder due to synchronization overhead.
+
+
+🔹 Quick Examples
+
+// String
+String s = "Hello";
+s = s + " World"; // Creates a new object
+
+// StringBuilder
+StringBuilder sb = new StringBuilder("Hello");
+sb.append(" World"); // Changes same object
+
+// StringBuffer
+StringBuffer sbf = new StringBuffer("Hello");
+sbf.append(" World"); // Changes same object (thread-safe)
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+✅ How memory is managed when using String literals vs new keyword
+
+📘 Memory Management: String Literals vs new Keyword in Java\
+
+🔹 String Literals
+
+📌 Stored in the String Pool (inside the Heap memory).
+
+📌 If a string with the same value already exists in the pool, Java reuses it instead of creating a new object.
+
+📌 Example:
+
+String s1 = "Java";
+String s2 = "Java"; // Reuses same object from String Pool
+System.out.println(s1 == s2); // true
+
+📌 Benefit: Saves memory by avoiding duplicate objects.
+
+
+🔹 Using new Keyword
+
+📌 Creates a new String object in the heap memory even if the same value exists in the String Pool.
+
+📌 Does not reuse from the pool unless .intern() method is used.
+
+📌 Example:
+
+String s1 = new String("Java"); // Always creates new object in heap
+String s2 = new String("Java");
+System.out.println(s1 == s2); // false
+
+📌 Drawback: Consumes more memory if duplicates are created.
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+✅ What is string interning?
+
+📘 What is String Interning in Java?
+
+🔹 Definition
+
+📌 String interning is the process of storing only one copy of each unique string value in the String Pool.
+
+📌 If the same string value is needed again, Java reuses the existing one instead of creating a new object.
+
+
+🔹 How it Works
+
+📌 By default, string literals are automatically interned by Java.
+
+📌 Strings created with the new keyword are not interned automatically.
+
+📌 You can manually intern a string using the .intern() method.
+
+🔹 Example
+
+String s1 = "Java";          // Stored in String Pool
+String s2 = new String("Java"); // Created in heap (outside pool)
+
+String s3 = s2.intern();     // Moves to pool or returns existing from pool
+
+System.out.println(s1 == s3); // true (both point to pool object)
